@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <div id="unity-container" class="unity-desktop">
+    <nav style="
+    height: 40px;
+    background: #111;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-family: sans-serif;
+  ">
+    <a href="/" style="color:white; text-decoration:none; margin-right:16px;">
+      Simulator
+    </a>
+    <a href="/about.html" style="color:white; text-decoration:none;">
+      About
+    </a>
+  </nav>
+    <div id="unity-container" class="unity-desktop" style="margin-top: 40px;">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>

@@ -18,13 +18,80 @@
     font-family: sans-serif;
   ">
     <a href="/" style="color:white; text-decoration:none; margin-right:16px;">
-      Simulator
+      F-35B Lift System
     </a>
     <a href="/about.html" style="color:white; text-decoration:none;">
       About
     </a>
   </nav>
-    <div id="unity-container" class="unity-desktop" style="margin-top: 40px;">
+    
+    <!-- Landing Page Section -->
+    <div id="landing-page" style="
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px 20px;
+      font-family: sans-serif;
+      text-align: center;
+    ">
+      <h1 style="
+        font-size: 48px;
+        margin-bottom: 24px;
+        color: #333;
+        font-weight: 700;
+      ">
+        F-35B Lift System Simulation
+      </h1>
+      
+      <p style="
+        font-size: 18px;
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 32px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      ">
+        Explore an interactive 3D simulation of the F-35B Lightning II's revolutionary Short Take-Off and Vertical Landing (STOVL) lift system. This WebGL experience demonstrates the complex engineering behind the aircraft's unique propulsion configuration.
+      </p>
+      
+      <button id="launch-button" style="
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 16px 48px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      " onmouseover="
+        this.style.transform='translateY(-2px)';
+        this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)';
+      " onmouseout="
+        this.style.transform='translateY(0)';
+        this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';
+      ">
+        Launch Simulation
+      </button>
+      
+      <div style="
+        margin-top: 48px;
+        padding: 24px;
+        background: #f5f5f5;
+        border-radius: 8px;
+        text-align: left;
+      ">
+        <h3 style="color: #333; margin-bottom: 12px; font-size: 20px;">Features:</h3>
+        <ul style="color: #666; line-height: 1.8; font-size: 16px;">
+          <li>Interactive 3D visualization of the lift system components</li>
+          <li>Real-time manipulation and exploration</li>
+          <li>Detailed view of the thrust vectoring nozzle and lift fan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="unity-container" class="unity-desktop" style="margin-top: 40px; display: none;">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -123,25 +190,93 @@
         canvas.style.height = "600px";
       }
 
-      loadingBar.style.display = "block";
+      // Function to load Unity when user clicks the launch button
+      function loadUnitySimulation() {
+        // Hide landing page and show Unity container
+        document.getElementById("landing-page").style.display = "none";
+        document.getElementById("unity-container").style.display = "block";
+        
+        loadingBar.style.display = "block";
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                loadingBar.style.display = "none";
-                fullscreenButton.onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-              }).catch((message) => {
-                alert(message);
-              });
-            };
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+          createUnityInstance(canvas, config, (progress) => {
+            progressBarFull.style.width = 100 * progress + "%";
+                }).then((unityInstance) => {
+                  loadingBar.style.display = "none";
+                  fullscreenButton.onclick = () => {
+                    unityInstance.SetFullscreen(1);
+                  };
+                }).catch((message) => {
+                  alert(message);
+                });
+              };
 
-      document.body.appendChild(script);
+        document.body.appendChild(script);
+      }
+
+      // Attach click event to launch button
+      document.getElementById("launch-button").onclick = loadUnitySimulation;
 
     </script>
+    
+    <footer style="
+      background: #111;
+      color: white;
+      padding: 20px 16px;
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    ">
+      <div style="margin-bottom: 12px; font-size: 14px;">
+        Connect with me:
+      </div>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <a href="https://x.com/DvynC" target="_blank" rel="noopener noreferrer" style="
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          background: #000;
+          transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          X
+        </a>
+        <a href="https://github.com/dvync" target="_blank" rel="noopener noreferrer" style="
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          background: #333;
+          transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/devyn-chapman/" target="_blank" rel="noopener noreferrer" style="
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          background: #0077B5;
+          transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          LinkedIn
+        </a>
+        <a href="https://www.facebook.com/devyn.chapman target="_blank" rel="noopener noreferrer" style="
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          background: #1877F2;
+          transition: opacity 0.2s;
+        " onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+          Facebook
+        </a>
+        </div>
+      <div style="margin-top: 16px; font-size: 12px; color: #888;">
+        © 2026 F-35B Lift System
+      </div>
+    </footer>
   </body>
 </html>

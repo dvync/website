@@ -10,6 +10,9 @@
   color: #e0e0e0;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 ">
   <nav style="
     background: #0d0d0d;
@@ -19,7 +22,7 @@
     align-items: center;
   ">
     <!-- Profile Picture and Website Title -->
-    <div style="display: flex; align-items: center; margin-right: 48px;">
+    <a href="/" style="display: flex; align-items: center; margin-right: 24px; text-decoration: none;">
       <img src="profile.jpg" alt="Devyn Chapman" style="
         width: 30px;
         height: 30px;
@@ -32,7 +35,14 @@
         font-weight: 500;
         color: #e0e0e0;
       ">DevynChapman.com</span>
-    </div>
+    </a>
+    
+    <span style="
+      height: 40px;
+      width: 1px;
+      background: #444;
+      margin-right: 24px;
+    "></span>
     
     <a href="/" style="color: #e0e0e0; text-decoration: none; margin-right: 24px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
       Projects
@@ -40,26 +50,22 @@
     <a href="/about.html" style="color: #e0e0e0; text-decoration: none; margin-right: 24px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
       About Me
     </a>
-    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style="
-      color: #e0e0e0;
-      text-decoration: none;
-      margin-left: auto;
-      padding: 8px 16px;
-      border: 1px solid #444;
-    " onmouseover="this.style.borderColor='#666'" onmouseout="this.style.borderColor='#444'">
-      Resume
+    <a href="/contact.html" style="color: #e0e0e0; text-decoration: none; margin-right: 24px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+      Contact
     </a>
   </nav>
 
-  <div style="max-width: 800px; margin: 80px auto; padding: 0 20px;">
-    <h1 style="font-size: 36px; margin-bottom: 24px; font-weight: 400;">Devyn Chapman</h1>
-    <p style="font-size: 16px; line-height: 1.6; color: #b0b0b0; margin-bottom: 16px;">
-      This website is a portfolio of my projects and interestes. I have several years of experience in consulting for the DoW and general software development.
-    </p>
+  <div style="flex: 1;">
+    <div style="max-width: 800px; margin: 80px auto; padding: 0 20px;">
+      <h1 style="font-size: 36px; margin-bottom: 24px; font-weight: 400;">Devyn Chapman</h1>
+      <p style="font-size: 16px; line-height: 1.6; color: #b0b0b0; margin-bottom: 16px;">
+        This website is a collection of projects and demos of some of my personal work. I have several years of experience in consulting for the DoW and general software development, but unfortuanately cannot share much of my professional work due to the sensitive nature of the data sets. Please email me at devynchapmanmc@gmail.com for any questions or inquiries. Thank you for visiting!
+      </p>
 
-    <p style="font-size: 16px; line-height: 1.6; color: #b0b0b0;">
-      Website built using HTML, CSS, and JavaScript. Deployed via GitHub Pages.
-    </p>
+      <p style="font-size: 16px; line-height: 1.6; color: #b0b0b0;">
+        Website built using HTML, CSS, and JavaScript. Deployed via GitHub Pages.
+      </p>
+    </div>
   </div>
 </body>
 </html>

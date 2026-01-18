@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | F35B_LiftSystem</title>
@@ -26,7 +27,7 @@
   ">
     <!-- Profile Picture and Website Title -->
     <a href="/" style="display: flex; align-items: center; margin-right: 24px; text-decoration: none;">
-      <img src="profile.jpg" alt="Devyn Chapman" style="
+      <img src="assets/profile.jpg" alt="Devyn Chapman" style="
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -73,7 +74,7 @@
         color: #e0e0e0;
         font-weight: 400;
       ">
-        Daily Traffic Analytics
+        Daily Weather Data
       </h1>
       
       <p style="
@@ -85,24 +86,9 @@
         margin-left: auto;
         margin-right: auto;
       ">
-        A time series visualization of daily traffic counts over a week period. Powered by automated GitHub Actions with delta table updates through Postgres/SQLite/Supabase via a simple REST API.
+        A time series visualization of daily weather data for Indianapolis, IN.
       </p>
-      
-      <div style="
-        background: #0d0d0d;
-        border: 1px solid #333;
-        border-radius: 8px;
-        padding: 40px;
-        margin: 32px auto;
-        max-width: 600px;
-      ">
-        <p style="
-          color: #888;
-          font-size: 14px;
-          font-style: italic;
-        ">
-          Dashboard Coming Soon...
-        </p>
+      <canvas id="weatherChart" width="600" height="350"></canvas>
       </div>
     </div>
 
@@ -144,7 +130,7 @@
         Explore a 3D Animation of the F-35B Lightning II's Short Take-Off and Vertical Landing (STOVL) lift system. Developed in Unity 3D.
       </p>
       
-      <img src="f35b.png" alt="F-35B Screenshot" style="
+      <img src="assets/f35b.png" alt="F-35B Screenshot" style="
         max-width: 100%;
         height: auto;
         margin: 0 auto 32px;
@@ -293,6 +279,69 @@
       // Attach click event to launch button
       document.getElementById("launch-button").onclick = loadUnitySimulation;
 
+      async function loadWeatherChart() {
+        const response = await fetch("data/daily_weather_report.csv");
+        const text = await response.text();
+
+        const rows = text.trim().split("\n").slice(1);
+
+        const dates = [];
+        const maxTemps = [];
+        const minTemps = [];
+
+        rows.forEach(row => {
+          const [time, max, min] = row.split(",");
+
+          dates.push(time);
+          maxTemps.push(parseFloat(max));
+          minTemps.push(parseFloat(min));
+        });
+
+        const ctx = document.getElementById("weatherChart").getContext("2d");
+
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: dates,
+            datasets: [
+              {
+                label: "Max Temperature (°C)",
+                data: maxTemps,
+                borderColor: "red",
+                tension: 0.2,
+                fill: false
+              },
+              {
+                label: "Min Temperature (°C)",
+                data: minTemps,
+                borderColor: "blue",
+                tension: 0.2,
+                fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                labels: {
+                  color: "#e0e0e0"
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: "#e0e0e0" }
+              },
+              y: {
+                ticks: { color: "#e0e0e0" }
+              }
+            }
+          }
+        });
+      }
+
+      loadWeatherChart();
     </script>
     </main>
   </body>

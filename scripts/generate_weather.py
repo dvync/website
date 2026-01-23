@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
+from pathlib import Path
 
 # Calculate dynamic date range
 start_date = (datetime.today() - timedelta(days=8)).strftime("%Y-%m-%d")
@@ -13,7 +14,9 @@ data = requests.get(url).json()
 df = pd.DataFrame(data["daily"])
 
 # Save to the same location your website already expects
-output_path = "../data/daily_weather_report.csv"
+# Use absolute path so it works whether run from scripts/ or root directory
+script_dir = Path(__file__).parent
+output_path = script_dir.parent / "data" / "daily_weather_report.csv"
 
 df.to_csv(output_path, index=False)
 

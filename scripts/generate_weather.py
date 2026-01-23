@@ -13,7 +13,7 @@ data = requests.get(url).json()
 df = pd.DataFrame(data["daily"])
 
 # Save to the same location your website already expects
-output_path = "data/daily_weather_report.csv"
+output_path = "../data/daily_weather_report.csv"
 
 df.to_csv(output_path, index=False)
 

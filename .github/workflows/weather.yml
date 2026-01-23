@@ -18,7 +18,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: pip install requests
+      run: pip install requests pandas
 
     - name: Run script
       run: python scripts/generate_weather.py
@@ -27,6 +27,6 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "actions@github.com"
-        git add weather.csv
+        git add data/daily_weather_report.csv
         git commit -m "Daily weather update" || echo "No changes"
         git push

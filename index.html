@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | F35B_LiftSystem</title>
+    <title>DevynChapman.com</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -61,7 +61,7 @@
     
     <main style="flex: 1;">
     <!-- Traffic Analytics Project Section -->
-    <div id="traffic-project" style="
+    <div id="weather-project" style="
       max-width: 800px;
       margin: 60px auto 40px;
       padding: 40px 20px;
@@ -252,8 +252,9 @@
 
       // Function to load Unity when user clicks the launch button
       function loadUnitySimulation() {
-        // Hide landing page, show Unity container
+        // Hide landing page and weather chart, show Unity container
         document.getElementById("landing-page").style.display = "none";
+        document.getElementById("weather-project").style.display = "none";
         document.getElementById("unity-container").style.display = "block";
         
         loadingBar.style.display = "block";

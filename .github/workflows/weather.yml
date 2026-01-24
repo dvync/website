@@ -1,8 +1,9 @@
+# keep-alive
 name: Daily Weather Update
 
 on:
   schedule:
-    - cron: "0 13 * * *"
+    - cron: "1 13 * * *"
   workflow_dispatch:
 
 jobs:

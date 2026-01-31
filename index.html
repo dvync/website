@@ -4,9 +4,98 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevynChapman.com</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+      /* Responsive Navigation */
+      @media (max-width: 768px) {
+        nav {
+          flex-wrap: wrap !important;
+          padding: 12px !important;
+        }
+        
+        /* Logo/home link - first child */
+        nav a:first-child {
+          width: 100%;
+          margin-bottom: 12px !important;
+          justify-content: center;
+        }
+        
+        nav span[style*="height: 40px"] {
+          display: none !important;
+        }
+        
+        /* All navigation text links */
+        nav a:not(:first-child) {
+          flex: 1;
+          text-align: center;
+          margin-right: 8px !important;
+          font-size: 14px;
+        }
+        
+        nav a:last-child {
+          margin-right: 0 !important;
+        }
+      }
+      
+      /* Responsive Typography */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 28px !important;
+        }
+        
+        p {
+          font-size: 14px !important;
+        }
+        
+        #launch-button {
+          width: 100%;
+          padding: 16px 24px !important;
+        }
+      }
+      
+      /* Responsive Chart Container */
+      #weatherChart {
+        max-width: 100%;
+        height: auto !important;
+      }
+      
+      #weather-project canvas {
+        display: block;
+      }
+      
+      @media (max-width: 768px) {
+        #weatherChart {
+          max-width: 100%;
+          height: auto !important;
+        }
+        
+        #weather-project {
+          padding: 20px 16px !important;
+          margin: 30px auto 20px !important;
+        }
+        
+        #landing-page {
+          padding: 20px 16px !important;
+          margin: 30px auto !important;
+        }
+      }
+      
+      /* Unity Canvas Responsive */
+      @media (max-width: 768px) {
+        #unity-canvas {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 100vw;
+        }
+        
+        #unity-container {
+          padding: 20px 0 !important;
+        }
+      }
+    </style>
   </head>
   <body style="
     background: #1a1a1a;
@@ -86,9 +175,10 @@
         margin-left: auto;
         margin-right: auto;
       ">
-        A time series visualization of daily weather data for Indianapolis, IN.
+        Central Indiana daily historical weather data, pulled from the Open-Meteo API and visualized with Chart.js.
       </p>
-      <canvas id="weatherChart" width="600" height="350"></canvas>
+      <div style="position: relative; width: 100%; max-width: 700px; margin: 0 auto; min-height: 350px;">
+        <canvas id="weatherChart"></canvas>
       </div>
     </div>
 
@@ -306,14 +396,14 @@
             labels: dates,
             datasets: [
               {
-                label: "High Temperature (°F)",
+                label: "High (°F)",
                 data: maxTemps,
                 borderColor: "red",
                 tension: 0.2,
                 fill: false
               },
               {
-                label: "Low Temperature (°F)",
+                label: "Low (°F)",
                 data: minTemps,
                 borderColor: "blue",
                 tension: 0.2,
@@ -323,6 +413,8 @@
           },
           options: {
             responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2,
             plugins: {
               legend: {
                 labels: {
@@ -332,7 +424,11 @@
             },
             scales: {
               x: {
-                ticks: { color: "#e0e0e0" }
+                ticks: { 
+                  color: "#e0e0e0",
+                  maxRotation: 45,
+                  minRotation: 45
+                }
               },
               y: {
                 ticks: { color: "#e0e0e0" }

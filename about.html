@@ -2,7 +2,55 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About – Devyn Chapman</title>
+  <style>
+    /* Responsive Navigation */
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap !important;
+        padding: 12px !important;
+      }
+      
+      /* Logo/home link - first child */
+      nav a:first-child {
+        width: 100%;
+        margin-bottom: 12px !important;
+        justify-content: center;
+      }
+      
+      nav span[style*="height: 40px"] {
+        display: none !important;
+      }
+      
+      /* All navigation text links */
+      nav a:not(:first-child) {
+        flex: 1;
+        text-align: center;
+        margin-right: 8px !important;
+        font-size: 14px;
+      }
+      
+      nav a:last-child {
+        margin-right: 0 !important;
+      }
+    }
+    
+    /* Responsive Typography */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px !important;
+      }
+      
+      p {
+        font-size: 14px !important;
+      }
+      
+      div[style*="margin: 80px auto"] {
+        margin: 40px auto !important;
+      }
+    }
+  </style>
 </head>
 <body style="
   font-family: sans-serif;

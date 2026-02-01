@@ -390,6 +390,19 @@
 
         const ctx = document.getElementById("weatherChart").getContext("2d");
 
+        // Calculate data range for better Y-axis scaling
+        const allTemps = [...maxTemps, ...minTemps];
+        const dataMin = Math.min(...allTemps);
+        const dataMax = Math.max(...allTemps);
+        const dataRange = dataMax - dataMin;
+        
+        // Add padding to the range (20% on each side for better visualization)
+        const padding = Math.max(dataRange * 0.2, 10); // At least 10 degrees padding
+        
+        // Round to nearest 5 for cleaner axis values
+        const yMin = Math.floor((dataMin - padding) / 5) * 5;
+        const yMax = Math.ceil((dataMax + padding) / 5) * 5;
+
         new Chart(ctx, {
           type: "line",
           data: {
@@ -398,15 +411,29 @@
               {
                 label: "High (°F)",
                 data: maxTemps,
-                borderColor: "red",
-                tension: 0.2,
+                borderColor: "#ff6b6b",
+                backgroundColor: "rgba(255, 107, 107, 0.1)",
+                borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                pointBackgroundColor: "#ff6b6b",
+                pointBorderColor: "#fff",
+                pointBorderWidth: 1,
+                tension: 0.3,
                 fill: false
               },
               {
                 label: "Low (°F)",
                 data: minTemps,
-                borderColor: "blue",
-                tension: 0.2,
+                borderColor: "#4ecdc4",
+                backgroundColor: "rgba(78, 205, 196, 0.1)",
+                borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                pointBackgroundColor: "#4ecdc4",
+                pointBorderColor: "#fff",
+                pointBorderWidth: 1,
+                tension: 0.3,
                 fill: false
               }
             ]
@@ -414,24 +441,64 @@
           options: {
             responsive: true,
             maintainAspectRatio: true,
-            aspectRatio: 2,
+            aspectRatio: window.innerWidth <= 768 ? 1.2 : 2,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
             plugins: {
               legend: {
                 labels: {
-                  color: "#e0e0e0"
+                  color: "#e0e0e0",
+                  font: {
+                    size: window.innerWidth <= 768 ? 14 : 12
+                  },
+                  padding: 15,
+                  usePointStyle: true,
+                  pointStyle: 'circle'
                 }
+              },
+              tooltip: {
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                padding: 12,
+                titleColor: "#fff",
+                bodyColor: "#fff",
+                borderColor: "#444",
+                borderWidth: 1
               }
             },
             scales: {
               x: {
+                grid: {
+                  color: "rgba(255, 255, 255, 0.05)",
+                  drawBorder: false
+                },
                 ticks: { 
-                  color: "#e0e0e0",
+                  color: "#b0b0b0",
                   maxRotation: 45,
-                  minRotation: 45
+                  minRotation: 45,
+                  font: {
+                    size: window.innerWidth <= 768 ? 12 : 11
+                  }
                 }
               },
               y: {
-                ticks: { color: "#e0e0e0" }
+                min: yMin,
+                max: yMax,
+                grid: {
+                  color: "rgba(255, 255, 255, 0.08)",
+                  drawBorder: false
+                },
+                ticks: { 
+                  color: "#b0b0b0",
+                  font: {
+                    size: window.innerWidth <= 768 ? 14 : 12
+                  },
+                  stepSize: 10,
+                  callback: function(value) {
+                    return value + '°';
+                  }
+                }
               }
             }
           }
